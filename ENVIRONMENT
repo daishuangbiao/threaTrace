@@ -12,18 +12,24 @@ sudo apt install build-essential sed cmake libjpeg-dev libeigen3-dev
 #安装git
 sudo apt install git
 git clone [url].git
-#安装python
+#安装python3.6
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install python3.6 python3.6-dev
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
 sudo apt-get install python3-distutils
 sudo apt install python3.6-pip
+sudo ln -s /usr/bin/python3 /usr/local/bin/python
 #安装包
+sudo su
 pip3 install pandas numpy 
 pip3 install typing_extensions
 pip3 install torch==1.9.1+cpu torchvision==0.10.1+cpu torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
-pip3 install torch-cluster==1.5.9 torch-geometric==1.4.3 torch-scatter==2.0.9 torch-sparse==0.6.12 torch-spline-conv==1.2.1
+pip3 install torch-cluster==1.5.9 torch-scatter==2.0.9 torch-sparse==0.6.12 torch-spline-conv==1.2.1
+pip3 install -U -i https://pypi.tuna.tsinghua.edu.cn/simple torch_geometric
+pip3 install psutil
+
+
 
 
 
