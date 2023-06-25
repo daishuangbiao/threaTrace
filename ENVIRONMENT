@@ -5,6 +5,14 @@ Details:
 user:daishuangbiao
 passwd:6241634
 (2) configuration process
+#安装依赖
+sudo apt-get install gcc
+sudo apt-get install cmake
+sudo apt install build-essential sed cmake libjpeg-dev libeigen3-dev
+#安装git
+sudo apt install git
+git clone [url].git
+
 
 
 Supplement:
