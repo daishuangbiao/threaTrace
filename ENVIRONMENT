@@ -46,8 +46,8 @@ chmod 777 train test
 Supplement:
 (1) VMware flash
 
-print("type:",type(data.edge_index))
 
+#####数据集
 StreamSpot Data
 链接：https://github.com/sbustreamspot/sbustreamspot-data
 HARVARD DATAVERSE 链接：https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/83KYJY
