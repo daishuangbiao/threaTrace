@@ -6,33 +6,78 @@ user:daishuangbiao
 passwd:6241634
 (2) configuration process
 #安装依赖
-sudo apt-get install gcc
-sudo apt-get install cmake
-sudo apt install build-essential sed cmake libjpeg-dev libeigen3-dev
+  sudo apt-get install gcc
+  sudo apt-get install cmake
+  sudo apt install build-essential sed cmake libjpeg-dev libeigen3-dev
 #安装git
-sudo apt install git
-git clone [url].git
-#安装python3.6
+  sudo apt install git
+  git clone [url].git
+##安装python3.6
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install python3.6 python3.6-dev
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
-sudo apt-get install python3-distutils
-sudo apt install python3.6-pip
+sudo apt-get install python3.6-distutils
+sudo apt install python3-pip
 sudo ln -s /usr/bin/python3 /usr/local/bin/python
 #安装包
-sudo su
+#sudo su
 pip3 install pandas numpy 
 pip3 install typing_extensions
-pip3 install torch==1.9.1+cpu torchvision==0.10.1+cpu torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
-pip3 install torch-cluster==1.5.9 torch-scatter==2.0.9 torch-sparse==0.6.12 torch-spline-conv==1.2.1
-pip3 install -U -i https://pypi.tuna.tsinghua.edu.cn/simple torch_geometric
 pip3 install psutil
-
-
-
-
+———————————
+pip3 install torch==1.7.1+cpu torchvision==0.8.2+cpu torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+#pip3 install torch==1.9.1+cpu torchvision==0.10.1+cpu torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
+#pip3 install torch==1.12.0+cpu torchvision==0.13.0+cpu torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cpu
+#pip3 install torch-cluster==1.5.9 torch-scatter==2.0.9 torch-sparse==0.6.12 torch-spline-conv==1.2.1
+pip3 install torch-scatter==2.0.7 -f https://pytorch-geometric.com/whl/torch-1.7.1+cpu.html
+pip3 install torch-sparse==0.6.9 -f https://pytorch-geometric.com/whl/torch-1.7.1+cpu.html
+pip3 install torch-cluster==1.5.9 -f https://pytorch-geometric.com/whl/torch-1.7.1+cpu.html
+pip3 install torch-spline-conv==1.2.1 -f https://pytorch-geometric.com/whl/torch-1.7.1+cpu.html
+pip3 install torch_geometric==1.4.3
+#pip3 install -U -i https://pypi.tuna.tsinghua.edu.cn/simple torch_geometric
+———————————
+python
+import torch,torch_scatter,torch_sparse,torch_cluster,torch_spline_conv,torch_geometric
+print(torch.__version__,torch_geometric.__version__,torch_scatter.__version__,torch_sparse.__version__,torch_cluster.__version__,torch_spline_conv.__version__)
+#运行代码
+chmod 777 train test
 
 Supplement:
 (1) VMware flash
 
+print("type:",type(data.edge_index))
+
+StreamSpot Data
+链接：https://github.com/sbustreamspot/sbustreamspot-data
+HARVARD DATAVERSE 链接：https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/83KYJY
+This repository contains the ALL dataset, which includes edges from all the 600 benign and attack scenario graphs. The YDC and GFC datasets can be derived from ALL by picking graph ID's having scenarios as follows:
+●YDC: YouTube, Download, CNN
+●GFC: GMail, VGame, CNN
+Format
+Tab-separated file with one edge on each line in the following format:
+source-id source-type destination-id destination-type	edge-type graph-id
+Graph ID's correspond to scenarios as follows:
+●YouTube (graph ID's 0 - 99)
+●GMail (graph ID's 100 - 199)
+●VGame (graph ID's 200 - 299)
+●Drive-by-download attack (graph ID's 300 - 399)
+●Download (graph ID's 400 - 499)
+●CNN (graph ID's 500 - 599)
+Construction
+The ALL dataset was extracted from the raw flow-graph data using preprocess.py, which performs the following:
+●Each node and edge type is mapped to a single character.
+●Consecutive edges between the same pair of nodes corresponding to block-by-block file reads are collapsed into a single edge.
+●Node ID's are incremented by 1 (so ID's of -1 become 0).
+●The timestamp field is removed (raw edges are sorted by timestamp).
+preprocess.py is run as: python preprocess.py <raw edges file>
+Map
+map = {'process': 'a', 'thread': 'b','file': 'c','MAP_ANONYMOUS': 'd','NA': 'e',
+       'stdin': 'f','stdout': 'g','stderr': 'h','accept': 'i','access': 'j',
+       'bind': 'k','chmod': 'l','clone': 'm','close': 'n','connect': 'o',
+       'execve': 'p','fstat': 'q','ftruncate': 'r','listen': 's','mmap2': 't',
+       'open': 'u','read': 'v','recv': 'w','recvfrom': 'x','recvmsg': 'y',
+       'send': 'z','sendmsg': 'A','sendto': 'B','stat': 'C','truncate': 'D',
+       'unlink': 'E','waitpid': 'F','write': 'G','writev': 'H',
+      }
+'a'-'h'为节点类型(8种) ‘i'-'z'&'A'-'H'（26种）其余的为边类型
